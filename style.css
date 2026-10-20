@@ -233,18 +233,22 @@ body {
   transform: none;
   box-shadow: none;
 }
-/* Browser-Datepicker, gestylt wie die übrigen Eingabefelder */
+/* Browser-Datepicker, sieht aus wie der frühere Button: "Datum ▾" */
 .eingabefeld.dd input[type="date"] {
+  position: relative;
   display: block;
   box-sizing: border-box;
   width: 100%;
   min-height: 40px;
-  padding: 8px 5px;
+  margin: 0;
+  padding: 8px 24px 8px 5px;
   border: none;
   border-bottom: 1px solid #ccc;
   border-radius: 0;
-  background: transparent;
-  color: #222;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23222'/%3E%3C/svg%3E")
+    no-repeat right 5px center;
+  color: inherit;
   font: inherit;
   font-size: 18px;
   text-align: left;
@@ -252,25 +256,23 @@ body {
   outline: none;
   appearance: none;
   -webkit-appearance: none;
-  transition: border-color 0.2s;
 }
 .eingabefeld.dd input[type="date"]:hover {
   border-bottom-color: #0077cc;
 }
-.eingabefeld.dd input[type="date"]:focus {
-  border-bottom: 2px solid #0077cc;
-  padding-bottom: 7px;
-}
 .eingabefeld.dd input[type="date"]::-webkit-date-and-time-value {
   text-align: left;
 }
+/* natives Kalender-Symbol unsichtbar, aber über das ganze Feld klickbar */
 .eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
   cursor: pointer;
-  opacity: 0.55;
-  transition: opacity 0.2s;
-}
-.eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
 }
 
 /* ===== AUSGABE ===== */
