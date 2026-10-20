@@ -48,20 +48,6 @@ const WORDL = {
   über: "über dem Laborrichtwert",
   im: "im Laborrichtwert",
 };
-const MN = [
-  "Januar",
-  "Februar",
-  "März",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Dezember",
-];
 
 const $ = (id) => document.getElementById(id);
 const pad = (n) => String(n).padStart(2, "0");
@@ -75,7 +61,6 @@ const num = (s) => {
 };
 
 let S = { date: iso(new Date()), v: {}, lab: {} }; // eine gemeinsame Wertebasis
-let view = new Date();
 const fmt = (d) => d.split("-").reverse().join(".");
 const hasData = () => Object.keys(S.v).length > 0;
 
@@ -232,50 +217,16 @@ document.addEventListener("paste", (ev) => {
   load(t);
 });
 
-/* ---------- Kalender ---------- */
+/* ---------- Datum (Browser-Datepicker) ---------- */
 function dlab() {
-  $("dlab").textContent = fmt(S.date);
+  $("datum").value = S.date;
 }
-function cal() {
-  const y = view.getFullYear(),
-    m = view.getMonth();
-  const off = (new Date(y, m, 1).getDay() + 6) % 7;
-  const n = new Date(y, m + 1, 0).getDate(),
-    td = iso(new Date());
-  let h = `<div class="ch"><button type="button" data-n="-1" aria-label="Vorheriger Monat">‹</button><b>${MN[m]} ${y}</b><button type="button" data-n="1" aria-label="Nächster Monat">›</button></div><div class="cg">`;
-  h +=
-    ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-      .map((w) => `<i>${w}</i>`)
-      .join("") + "<span></span>".repeat(off);
-  for (let d = 1; d <= n; d++) {
-    const s = iso(new Date(y, m, d));
-    h += `<button type="button" data-d="${s}" class="${s === S.date ? "sel" : ""} ${s === td ? "td" : ""}">${d}</button>`;
-  }
-  $("cal").innerHTML = h + "</div>";
-}
-$("dbtn").onclick = (e) => {
-  e.stopPropagation();
-  if ($("cal").classList.toggle("open")) {
-    view = new Date(S.date + "T12:00:00");
-    view.setDate(1);
-    cal();
-  }
-};
-$("cal").onclick = (e) => {
-  e.stopPropagation();
-  const b = e.target.closest("button");
-  if (!b) return;
-  if (b.dataset.n) {
-    view = new Date(view.getFullYear(), view.getMonth() + +b.dataset.n, 1);
-    cal();
-  } else if (b.dataset.d) {
-    S.date = b.dataset.d;
-    dlab();
-    $("cal").classList.remove("open");
-    if (hasData()) show();
-  }
-};
-document.addEventListener("click", () => $("cal").classList.remove("open"));
+$("datum").addEventListener("change", (e) => {
+  // Datum gelöscht -> heutiges Datum als Fallback
+  S.date = e.target.value || iso(new Date());
+  dlab();
+  if (hasData()) show();
+});
 
 /* ---------- Copy & Reset ---------- */
 $("CopyBtn").onclick = async () => {
