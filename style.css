@@ -261,7 +261,35 @@ body {
   border-bottom-color: #0077cc;
 }
 .eingabefeld.dd input[type="date"]::-webkit-date-and-time-value {
+  min-height: 1.2em;
   text-align: left;
+}
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit,
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+/* Tag/Monat/Jahr nie einzeln markieren (kein blaues Kästchen), Text nicht auswählbar */
+.eingabefeld.dd input[type="date"] {
+  -webkit-user-select: none;
+  user-select: none;
+  caret-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: transparent;
+  color: inherit;
+  outline: none;
+}
+.eingabefeld.dd input[type="date"]::selection,
+.eingabefeld.dd input[type="date"] ::selection {
+  background: transparent;
+  color: inherit;
+}
+.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-text {
+  padding: 0 1px;
+  opacity: 1;
 }
 /* natives Kalender-Symbol unsichtbar, aber über das ganze Feld klickbar */
 .eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator {
