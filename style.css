@@ -151,7 +151,7 @@ body {
 }
 .card.datum {
   z-index: 5;
-} /* Kalender liegt über der Ausgabe-Karte */
+}
 
 /* ===== DROP-FELD ===== */
 .drop {
@@ -233,123 +233,44 @@ body {
   transform: none;
   box-shadow: none;
 }
-.dbtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Browser-Datepicker, gestylt wie die übrigen Eingabefelder */
+.eingabefeld.dd input[type="date"] {
+  display: block;
+  box-sizing: border-box;
   width: 100%;
+  min-height: 40px;
   padding: 8px 5px;
   border: none;
   border-bottom: 1px solid #ccc;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-size: 18px;
-  cursor: pointer;
-}
-.dbtn:hover {
-  border-bottom-color: #0077cc;
-}
-
-/* ===== KALENDER-FENSTER ===== */
-.cal {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  z-index: 50;
-  box-sizing: border-box;
-  width: 300px;
-  max-width: calc(100vw - 52px);
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0.2s ease;
-}
-.cal.open {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-}
-.cal button {
-  margin: 0;
-  padding: 0;
-  border: none;
+  border-radius: 0;
   background: transparent;
   color: #222;
   font: inherit;
+  font-size: 18px;
+  text-align: left;
   cursor: pointer;
+  outline: none;
   appearance: none;
   -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s;
 }
-.ch {
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
-  align-items: center;
-  margin-bottom: 10px;
-  text-align: center;
+.eingabefeld.dd input[type="date"]:hover {
+  border-bottom-color: #0077cc;
 }
-.ch b {
-  font-size: 1.05rem;
+.eingabefeld.dd input[type="date"]:focus {
+  border-bottom: 2px solid #0077cc;
+  padding-bottom: 7px;
 }
-.ch button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 24px;
-  line-height: 1;
-  transition: background 0.2s;
+.eingabefeld.dd input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
 }
-.cg {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
-}
-.cg i {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 26px;
-  font-size: 0.78rem;
-  font-style: normal;
+.eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
   opacity: 0.55;
+  transition: opacity 0.2s;
 }
-.cg button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 0.95rem;
-  transition:
-    background 0.2s,
-    transform 0.2s;
-}
-.ch button:hover,
-.cg button:hover {
-  background: rgba(0, 119, 204, 0.12);
-}
-.cg button:hover {
-  transform: scale(1.08);
-}
-.cg button.td {
-  box-shadow: inset 0 0 0 1.5px #0077cc;
-}
-.cg button.sel {
-  background: linear-gradient(135deg, #0077cc, #00a2ff);
-  color: #fff;
+.eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* ===== AUSGABE ===== */
@@ -407,13 +328,7 @@ pre {
   .eingabefeld.dd {
     max-width: none;
   }
-  .cal {
-    left: 0;
-    right: 0;
-    width: auto;
-    max-width: none;
-  }
-  .dbtn {
+  .eingabefeld.dd input[type="date"] {
     min-height: 44px;
     font-size: 20px;
   }
