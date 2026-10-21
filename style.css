@@ -343,19 +343,49 @@ pre {
   }
 }
 
-/* Copy-Button: kurzes Wackeln, wenn noch nichts zum Kopieren da ist */
+/* Copy-Button: Wackeln + Hinweis, wenn noch nichts zum Kopieren da ist */
 #CopyBtn.shake {
-  animation: copy-shake 0.35s ease;
+  animation: copy-shake 0.5s ease;
 }
 @keyframes copy-shake {
   0%,
   100% {
-    translate: 0;
+    transform: translateX(0);
   }
-  25% {
-    translate: -5px;
+  15% {
+    transform: translateX(-9px);
+  }
+  35% {
+    transform: translateX(9px);
+  }
+  55% {
+    transform: translateX(-6px);
   }
   75% {
-    translate: 5px;
+    transform: translateX(6px);
   }
+}
+#CopyBtn::after {
+  content: "Noch keine Werte zum Kopieren";
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #222;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+#CopyBtn.tip::after {
+  opacity: 1;
+  transform: none;
 }

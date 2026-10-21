@@ -254,7 +254,9 @@ $("CopyBtn").onclick = async () => {
     // nichts zu kopieren: Button wackelt kurz + Hinweis
     b.classList.remove("shake");
     void b.offsetWidth;
-    b.classList.add("shake");
+    b.classList.add("shake", "tip");
+    clearTimeout(b._tt);
+    b._tt = setTimeout(() => b.classList.remove("tip"), 2200);
     $("msg").className = "";
     $("msg").textContent = "Noch keine Werte zum Kopieren.";
     return;
