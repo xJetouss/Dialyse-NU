@@ -241,14 +241,24 @@ async function copyText(text) {
   ta.style.position = "fixed";
   ta.style.opacity = "0";
   document.body.appendChild(ta);
+  ta.focus();
   ta.select();
+  ta.setSelectionRange(0, text.length);
   const ok = document.execCommand("copy");
   document.body.removeChild(ta);
   if (!ok) throw new Error("copy failed");
 }
 $("CopyBtn").onclick = async () => {
   const b = $("CopyBtn");
-  if (!hasData()) return;
+  if (!hasData()) {
+    // nichts zu kopieren: Button wackelt kurz + Hinweis
+    b.classList.remove("shake");
+    void b.offsetWidth;
+    b.classList.add("shake");
+    $("msg").className = "";
+    $("msg").textContent = "Noch keine Werte zum Kopieren.";
+    return;
+  }
   try {
     await copyText(build());
     b.classList.add("done");
@@ -259,6 +269,9 @@ $("CopyBtn").onclick = async () => {
     $("msg").textContent = "Kopieren nicht erlaubt, bitte Text markieren.";
   }
 };
+$("CopyBtn").addEventListener("animationend", () =>
+  $("CopyBtn").classList.remove("shake"),
+);
 $("resetBtn").onclick = () => {
   S = { date: iso(new Date()), v: {}, lab: {} };
   dlab();
