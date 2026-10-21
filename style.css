@@ -44,9 +44,12 @@ body {
     box-shadow 0.12s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.BTN:hover {
-  background: #d1cfcf;
-  scale: 1.12;
+/* Hover nur mit Maus – auf Touch-Geräten bleibt der Button sonst "markiert" */
+@media (hover: hover) and (pointer: fine) {
+  .BTN:hover {
+    background: #d1cfcf;
+    scale: 1.12;
+  }
 }
 .BTN:active {
   background: #c4c4c4;
@@ -365,15 +368,17 @@ pre {
     transform: translateX(6px);
   }
 }
-/* Hinweis-Blase: hängt an der Zeile (wackelt nicht mit) und liegt über allen Karten */
+/* Hinweis-Blase: liegt INNERHALB der Karte (über dem Textfeld), wackelt nicht mit
+   und kann deshalb nie unter anderen Karten verschwinden */
 .outrow {
   position: relative;
 }
 .outrow::after {
   content: "Noch keine Werte zum Kopieren";
   position: absolute;
-  right: 0;
-  bottom: calc(100% + 10px);
+  left: 8px;
+  top: 8px;
+  max-width: calc(100% - 90px);
   padding: 8px 12px;
   border-radius: 10px;
   background: #222;
@@ -381,17 +386,15 @@ pre {
   font-size: 13px;
   line-height: 1.2;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   opacity: 0;
   transform: translateY(4px);
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
   pointer-events: none;
-  z-index: 50;
-}
-/* .card.datum hat z-index 5 -> die Karte mit dem Hinweis muss darüber liegen */
-.card.tip-open {
-  z-index: 20;
+  z-index: 5;
 }
 .card.tip-open .outrow::after {
   opacity: 1;

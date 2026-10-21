@@ -260,8 +260,7 @@ $("CopyBtn").onclick = async () => {
     card.classList.add("tip-open");
     clearTimeout(b._tt);
     b._tt = setTimeout(() => card.classList.remove("tip-open"), 2200);
-    $("msg").className = "";
-    $("msg").textContent = "Noch keine Werte zum Kopieren.";
+    b.blur();
     return;
   }
   try {
