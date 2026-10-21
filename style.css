@@ -365,7 +365,11 @@ pre {
     transform: translateX(6px);
   }
 }
-#CopyBtn::after {
+/* Hinweis-Blase: hängt an der Zeile (wackelt nicht mit) und liegt über allen Karten */
+.outrow {
+  position: relative;
+}
+.outrow::after {
   content: "Noch keine Werte zum Kopieren";
   position: absolute;
   right: 0;
@@ -383,9 +387,13 @@ pre {
     opacity 0.2s ease,
     transform 0.2s ease;
   pointer-events: none;
-  z-index: 10;
+  z-index: 50;
 }
-#CopyBtn.tip::after {
+/* .card.datum hat z-index 5 -> die Karte mit dem Hinweis muss darüber liegen */
+.card.tip-open {
+  z-index: 20;
+}
+.card.tip-open .outrow::after {
   opacity: 1;
   transform: none;
 }

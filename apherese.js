@@ -341,9 +341,12 @@ $("CopyBtn").onclick = async () => {
     // nichts zu kopieren: Button wackelt kurz + Hinweis
     b.classList.remove("shake");
     void b.offsetWidth;
-    b.classList.add("shake", "tip");
+    b.classList.add("shake");
+    // Hinweis über allen Karten anzeigen
+    const card = b.closest(".card");
+    card.classList.add("tip-open");
     clearTimeout(b._tt);
-    b._tt = setTimeout(() => b.classList.remove("tip"), 2200);
+    b._tt = setTimeout(() => card.classList.remove("tip-open"), 2200);
     $("msg").className = "";
     $("msg").textContent = "Noch keine Werte zum Kopieren.";
     return;
