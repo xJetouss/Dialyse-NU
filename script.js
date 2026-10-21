@@ -229,11 +229,28 @@ $("datum").addEventListener("change", (e) => {
 });
 
 /* ---------- Copy & Reset ---------- */
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  // Fallback für unsichere Kontexte / ältere Browser
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  const ok = document.execCommand("copy");
+  document.body.removeChild(ta);
+  if (!ok) throw new Error("copy failed");
+}
 $("CopyBtn").onclick = async () => {
   const b = $("CopyBtn");
   if (!hasData()) return;
   try {
-    await navigator.clipboard.writeText(build());
+    await copyText(build());
     b.classList.add("done");
     clearTimeout(b._t);
     b._t = setTimeout(() => b.classList.remove("done"), 2000);
