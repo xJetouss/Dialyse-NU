@@ -245,7 +245,9 @@ body {
   border: none;
   border-bottom: 1px solid #ccc;
   border-radius: 0;
-  background: transparent;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23222'/%3E%3C/svg%3E")
+    no-repeat right 5px center;
   color: inherit;
   font: inherit;
   font-size: 18px;
@@ -259,35 +261,7 @@ body {
   border-bottom-color: #0077cc;
 }
 .eingabefeld.dd input[type="date"]::-webkit-date-and-time-value {
-  min-height: 1.2em;
   text-align: left;
-}
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit,
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-fields-wrapper {
-  padding: 0;
-}
-/* Tag/Monat/Jahr nie einzeln markieren (kein blaues Kästchen), Text nicht auswählbar */
-.eingabefeld.dd input[type="date"] {
-  -webkit-user-select: none;
-  user-select: none;
-  caret-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-}
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-day-field:focus,
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-month-field:focus,
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-year-field:focus {
-  background: transparent;
-  color: inherit;
-  outline: none;
-}
-.eingabefeld.dd input[type="date"]::selection,
-.eingabefeld.dd input[type="date"] ::selection {
-  background: transparent;
-  color: inherit;
-}
-.eingabefeld.dd input[type="date"]::-webkit-datetime-edit-text {
-  padding: 0 1px;
-  opacity: 1;
 }
 /* natives Kalender-Symbol unsichtbar, aber über das ganze Feld klickbar */
 .eingabefeld.dd input[type="date"]::-webkit-calendar-picker-indicator {
@@ -366,5 +340,22 @@ pre {
   }
   .switch {
     margin: 0 12px 16px;
+  }
+}
+
+/* Copy-Button: kurzes Wackeln, wenn noch nichts zum Kopieren da ist */
+#CopyBtn.shake {
+  animation: copy-shake 0.35s ease;
+}
+@keyframes copy-shake {
+  0%,
+  100% {
+    translate: 0;
+  }
+  25% {
+    translate: -5px;
+  }
+  75% {
+    translate: 5px;
   }
 }
