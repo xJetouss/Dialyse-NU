@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="../faviconA/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="../faviconA/favicon.svg" />
+        <link rel="shortcut icon" href="../faviconA/favicon.ico" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../faviconA/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="Apherese NU" />
+        <link rel="manifest" href="../faviconA/site.webmanifest" />
+        <meta name="apple-mobile-web-app-title" content="Apherese NU" />
+        <title>Apherese NU</title>
+        <link rel="stylesheet" href="../style.css?v=3" />
+    </head>
+    <body>
+        <div class="header">
+            <h1>Apherese NU</h1>
+            <button
+                class="BTN"
+                id="resetBtn"
+                title="Zurücksetzen"
+                aria-label="Zurücksetzen"
+            >
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"
+                    />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="switch" aria-label="Bereich wählen">
+            <a href="../Dialyse/">Dialyse NU</a>
+            <a href="" class="active" aria-current="page">Apherese NU</a>
+        </nav>
+
+        <div class="card">
+            <div class="drop" id="drop" tabindex="0">
+                <b>Labortabelle hier hineinziehen</b>
+                <p>
+                    oder Text markieren und hineinziehen, oder ⌘V / Strg+V
+                    drücken
+                </p>
+                <button type="button" class="pill" id="clip">
+                    Aus Zwischenablage einfügen
+                </button>
+                <div id="msg"></div>
+            </div>
+        </div>
+
+        <form class="card datum" onsubmit="return false;">
+            <div class="umrechner">
+                <div class="title">Labordatum</div>
+                <div class="eingabefeld dd" id="dd">
+                    <input type="date" id="datum" />
+                </div>
+            </div>
+            <div class="hint">
+                Neu eingefügte Werte ergänzen die bisherigen oder aktualisieren
+                sie. Werte, die im neuen Text fehlen, bleiben bestehen.
+            </div>
+        </form>
+
+        <div class="card">
+            <div class="outrow">
+                <pre id="out">Noch keine Werte.</pre>
+                <button
+                    class="BTN"
+                    id="CopyBtn"
+                    title="Text kopieren"
+                    aria-label="Text kopieren"
+                >
+                    <svg class="ic-copy" viewBox="0 0 24 24">
+                        <path
+                            d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"
+                        />
+                    </svg>
+                    <svg class="ic-check" viewBox="0 0 24 24">
+                        <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <script src="apherese.js?v=3"></script>
+    </body>
+</html>
